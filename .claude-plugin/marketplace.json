@@ -1,0 +1,18 @@
+{
+  "name": "fs-design",
+  "owner": {
+    "name": "Fair Supply"
+  },
+  "metadata": {
+    "description": "Marketplace for the fs-design plugin — Fair Supply's FS-Luz design suite.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "fs-design",
+      "source": "./",
+      "description": "FS-Luz design suite: /fs-design shape · critique · audit · normalize · polish · harden · animate · … plus luz-lint enforcement.",
+      "category": "design"
+    }
+  ]
+}
