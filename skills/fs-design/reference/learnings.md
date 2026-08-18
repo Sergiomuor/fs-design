@@ -26,3 +26,11 @@ Every visual value written into code (colour, spacing, type, radius, shadow) mus
 ## L003 · component:DataLabel · added 2026-08-18 · active
 Labels inside data-boxes (DataLabel headings, DataBlock KPI labels) always render Inter 400, 10px/14px, 0.7px letter-spacing, uppercase, in `text-text-medium` #585b5d. Never weight 500 (too bold at 10px — ruled against a live render), never untracked `text-data-label`, and never the hardcoded `color="dark"`. Do not restyle the `text-label-xs` utility to achieve this — it has weight-500 consumers; the recipe lives in DataLabel's heading slot.
 — origin: /admin/accounts shape run — user ruled the data-box label recipe against the live render (500 read too bold) and set the colour to text-medium.
+
+## L004 · surface:tables · added 2026-08-18 · active
+Entity names (accounts, companies, organisations) in platform tables always render `text-body-md` in `text-text-black` #000000 — never bold/medium weight. Underline only when the name itself is a link; a clickable row does not underline the name.
+— origin: /admin/accounts shape run — user ruled table entity names against the mockup; the font-medium incumbent pattern is overruled.
+
+## L005 · component:DataBlock · added 2026-08-18 · active
+Numbers in data-boxes (DataBlock/KPI values) render `DataText size="xl"` (`text-data-xl`) in `text-text-black`. When the box's sizing cannot show the full number, step down to `text-data-md` or `text-data-sm` as the format or context allows — never bold Inter.
+— origin: /admin/accounts shape run — user set the data-box number role (restated twice; the ladder deliberately skips text-data-lg).
