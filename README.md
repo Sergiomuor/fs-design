@@ -88,7 +88,7 @@ Every design command ends with one structured feedback offer: a numbered invento
 — origin: <what feedback produced it>
 ```
 
-Learnings load at setup on every run and override playbook defaults; `feedback promote` later folds proven rules into the owning playbook or script, `feedback retire <id>` deactivates a bad one (ids are never deleted). The loop ends by bumping the plugin version, committing, and running `claude plugin update fs-design` — required, because the installed plugin is a frozen cache copy that never sees repo edits on its own.
+Learnings load at setup on every run and override playbook defaults; `feedback promote` later folds proven rules into the owning playbook or script, `feedback retire <id>` deactivates a bad one (ids are never deleted). The loop ends by bumping the plugin version, committing, and running `claude plugin update fs-design@fs-design` — required, because the installed plugin is a frozen cache copy that never sees repo edits on its own (new rules apply from the next session).
 
 Installs from GitHub (no local repo clone) write rules to a personal overlay at `~/.claude/fs-design.learnings.md` instead — read live each session, survives updates, and PR-able into the repo when a rule deserves to be shared.
 

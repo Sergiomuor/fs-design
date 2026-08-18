@@ -64,8 +64,8 @@ The installed plugin is a frozen copy; repo edits are invisible until refreshed:
 
 1. Bump the patch version in `.claude-plugin/plugin.json` (the cache is keyed by version).
 2. Commit everything in the plugin repo — message `feedback: <summary> (Ln–Lm)`. Pushing to GitHub is asked, never automatic.
-3. `claude plugin update fs-design`.
-4. Verify: `~/.claude/plugins/installed_plugins.json` shows the new version and the new cache path contains the entry just written. Report the verified version — "rules L004–L005 active as of 1.1.3" — not just "done".
+3. `claude plugin update fs-design@fs-design` — the qualified `name@marketplace` form; the bare name is not found.
+4. Verify: `~/.claude/plugins/installed_plugins.json` shows the new version and the new cache path contains the entry just written (ignore its `gitCommitSha` — it is not refreshed on update; compare versions and content). Report the verified version and that it applies from the **next** session — the running session keeps the old copy ("rules L004–L005 active as of 1.1.3, from your next session").
 
 Personal-overlay writes (teammate path) skip all of this: the overlay is read live each session.
 
