@@ -14,19 +14,21 @@ Internal Fair Supply tooling.
 
 ## Install
 
-From a local clone:
+Teammates install straight from GitHub (public repo, no special access needed):
+
+```bash
+claude plugin marketplace add Sergiomuor/fs-design
+claude plugin install fs-design@fs-design
+```
+
+From a local clone instead:
 
 ```bash
 claude plugin marketplace add /path/to/fs-design
 claude plugin install fs-design@fs-design
 ```
 
-Once pushed to GitHub, teammates use the repo URL instead:
-
-```bash
-claude plugin marketplace add FairSupply/fs-design
-claude plugin install fs-design@fs-design
-```
+This is a per-person, per-machine install — each teammate runs it once themselves; it isn't pulled in automatically via the platform repo. It also assumes a local clone of `FairSupply/platform` on disk, since most commands (`critique`, `normalize`, `audit`, …) operate on real files there.
 
 ## Commands
 
