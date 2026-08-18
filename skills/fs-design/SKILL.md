@@ -3,7 +3,7 @@ name: fs-design
 description: Fair Supply's design suite for the FS-Luz system. Use when the user wants to design, redesign, shape, critique, audit, polish, normalize, clarify, distill, harden, optimize, adapt, animate, or otherwise improve any Fair Supply platform UI — dashboards, engagement flows, supplier tables, scorecards, reports, luz components, storybook docs. Covers UX review, visual hierarchy, Luz token/component conformance, accessibility, performance, responsive and print behavior, typography, spacing, colour semantics (exposure/mitigation/risk scales), motion, UX copy and ESG-to-procurement language, error states, empty states, i18n, and promoting patterns into the luz design system. Also for bland surfaces that need sharper consequence, loud surfaces that should be calmer, and luz-lint enforcement of the token vocabulary. Not for backend-only or non-UI tasks.
 version: 1.0.0
 user-invocable: true
-argument-hint: "[shape · critique|audit · normalize|polish|distill|harden|onboard · bolder|quieter|animate|colorize|typeset|layout|delight|overdrive · clarify|adapt|optimize · init|document|extract|live|doctor|hooks|lint] [target]"
+argument-hint: "[shape · critique|audit · normalize|polish|distill|harden|onboard · bolder|quieter|animate|colorize|typeset|layout|delight|overdrive · clarify|adapt|optimize · init|document|extract|live|feedback|doctor|hooks|lint] [target]"
 ---
 
 You are designing for Fair Supply: a supplier risk and ESG compliance platform whose interface must feel like an informed consultant — structured, precise, calm. Every surface serves three personas at once (daily-operator Pete, periodic-overseer Petra, expert Esther), and the visual system is FS-Luz: light spacious surfaces, strong black type, colour earned by consequence, purple only ever meaning focus. Craft here is not expressiveness — it is consequence made immediately legible, methodology one step deeper, and every value on the token scale.
@@ -18,10 +18,11 @@ Core principles:
 ## Setup
 
 1. Run `node <plugin-root>/skills/fs-design/scripts/context.mjs` once per session, from the user's project directory (pass a named file or route as `--target <path>`). It locates DESIGN.md/PRODUCT.md (project copies or plugin snapshots), verifies sentinel tokens against production `styles.css`, classifies the target surface, and reports luz-lint hook status. Follow its directives; do not rerun it. Report any `DRIFT` lines to the user and suggest `doctor` — never repair drift as a side effect of a design task.
-2. Load [reference/product.md](reference/product.md) and [reference/luz-core.md](reference/luz-core.md) — personas, surface modes, and the Luz ground rules. Load [reference/components.md](reference/components.md) whenever choosing or building components.
+2. Load [reference/product.md](reference/product.md) and [reference/luz-core.md](reference/luz-core.md) — personas, surface modes, and the Luz ground rules. When context.mjs reports active learnings, load [reference/learnings.md](reference/learnings.md) (and the personal overlay it names) — user-confirmed feedback rules that **override playbook defaults on conflict**. Load [reference/components.md](reference/components.md) whenever choosing or building components.
 3. Before acting, load the one playbook that owns the request (Commands table below). Then inspect the target and at least one representative source of incumbent visual truth (the component's `.styles.ts`, a sibling surface, or the Storybook story) before editing.
 4. After analysis and direction are resolved, load [reference/craft-floor.md](reference/craft-floor.md) immediately before editing UI. Do not load it for planning-only work.
 5. After edits, run `node <plugin-root>/skills/fs-design/scripts/luz-lint.mjs <changed files>` (or `--diff`) and fix errors before reporting done. Skip this when the luz-lint hook is on — it already told you.
+6. End every design command with the feedback offer: a numbered inventory of the surfaces, components, and decisions this run touched, and one invitation to critique any of them. On any feedback, load [reference/feedback.md](reference/feedback.md) and follow it — fixes land now, durable rules land in learnings with the user confirming wording first, and the session ends with the installed plugin refreshed. One offer, never a nag; skip it for maintenance commands (`lint`, `hooks`, `doctor`, `document`, `init`).
 
 ## Surface modes
 
@@ -61,6 +62,7 @@ A surface has one primary mode but stays consumable across the spectrum — mean
 | `adapt [target]` | Fix | Viewport, print/PDF (report mode), density contexts | [reference/adapt.md](reference/adapt.md) |
 | `optimize [target]` | Fix | Perceived performance: skeletons, hydration, bundle hygiene | [reference/optimize.md](reference/optimize.md) |
 | `live` | Iterate | Visual iteration against Storybook or the running app | [reference/live.md](reference/live.md) |
+| `feedback [notes]` | Learn | Capture feedback on a run (inventory or on-screen pointing); persist confirmed rules into the plugin | [reference/feedback.md](reference/feedback.md) |
 | `doctor` | Maintain | Drift report: plugin refs vs DESIGN.md vs production | [reference/doctor.md](reference/doctor.md) |
 
 **`lint [files]`** — run `node <plugin-root>/skills/fs-design/scripts/luz-lint.mjs` directly (`--diff` for changed files, `--json` for machine output). **`hooks <on|off|status>`** — manage the opt-in auto-lint hook via `node <plugin-root>/skills/fs-design/scripts/hook-admin.mjs`; the hook is dormant until enabled per-project.

@@ -12,6 +12,7 @@ Reports disagreement between the four layers that must stay aligned: **productio
    - `.claude/skills/luz/SKILL.md` in the platform repo: known to drift (old category names, legacy components, off values) — spot-check its component categories against `packages/luz/src/components/` and list concrete wrong lines, so the team can decide whether to refresh or retire it.
    - Figma (FS-Luz: UI): can't be read from here — list the changed values that need a Figma-side verification pass, linked by value not name.
 5. **Enforcement health** — hook state (on/off + toggle file present), lint self-test (`luz-lint.mjs` runs and returns JSON on a known file), hooks.json intact.
+6. **Install freshness** — the version in `~/.claude/plugins/installed_plugins.json` for `fs-design@fs-design` vs `.claude-plugin/plugin.json` in the source repo (path in `~/.claude/plugins/known_marketplaces.json`), and uncommitted changes in that repo. A stale or behind cache means runs obey an old plugin — repair is commit + `claude plugin update fs-design`. Also spot-check that learnings entries marked `promoted → <file>` actually appear in their destination files.
 
 ## Report
 

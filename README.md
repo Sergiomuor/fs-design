@@ -6,7 +6,7 @@ Internal Fair Supply tooling.
 
 ## What's inside
 
-- **One hub skill** — `/fs-design <command> [target]` with 24 commands across Build / Evaluate / Refine / Enhance / Fix / Iterate / Maintain.
+- **One hub skill** — `/fs-design <command> [target]` with 25 commands across Build / Evaluate / Refine / Enhance / Fix / Iterate / Learn / Maintain.
 - **Baked-in context** — `reference/product.md` (personas, brand, the five design principles from Product MD) and `reference/DESIGN.snapshot.md` (the complete FS-Luz spec), plus distilled working references (`luz-core.md`, `components.md`, `craft-floor.md`).
 - **luz-lint** — a zero-dependency scanner enforcing the Luz vocabulary: hex/rgb literals (with token-name fix hints), stock Tailwind palette/type classes, spacing utilities ≥ 10 and fractionals, arbitrary values, stock radius/shadow, `dark:` variants, gradients, legacy `@repo/luz` exports, purple-as-decoration, appended currency codes.
 - **An opt-in hook** — auto-lints every UI file edit Claude makes, feeding findings straight back into the session. Dormant until you switch it on per project.
@@ -40,6 +40,7 @@ This is a per-person, per-machine install — each teammate runs it once themsel
 | **Enhance** | `bolder` (sharpen consequence) · `quieter` (calm overstated surfaces) · `animate` (luz motion vocabulary) · `colorize` (domain colour semantics) · `typeset` (type roles, 10px grid) · `layout` (5px scale, gap ownership) · `delight` (calm-confidence details) · `overdrive` (flagship craft) |
 | **Fix** | `clarify` (ESG→risk/action/outcome copy) · `adapt` (viewports + print/PDF report mode) · `optimize` (perceived performance) |
 | **Iterate** | `live` (Storybook/browser iteration loop) |
+| **Learn** | `feedback` (end-of-run feedback capture → persistent rules; also `list` / `retire` / `promote`) |
 | **Maintain** | `doctor` (drift report) · `lint` (run luz-lint) · `hooks` (manage the auto-lint hook) |
 
 Examples:
@@ -77,6 +78,20 @@ node <plugin-root>/skills/fs-design/scripts/hook-admin.mjs off
 
 The toggle lives in `.claude/fs-design.local.json` at the project root (a per-person setting — add it to `.gitignore`). `FS_DESIGN_HOOK=1` forces it on for a session. When active, every UI file Claude edits is scanned and findings return as context, so violations get fixed in the same turn. The hook never blocks an edit.
 
+## The feedback loop
+
+Every design command ends with one structured feedback offer: a numbered inventory of what the run touched (components, files, decisions), which you can answer by number/name or by pointing at the rendered surface in Storybook/the browser. Each item is classified — one-off fix (applied now), durable rule, reference correction, or lint/script change — and **durable rules are only written after you confirm the exact wording**, into `reference/learnings.md`:
+
+```
+## L003 · component:Button · added 2026-08-20 · active
+<the rule>
+— origin: <what feedback produced it>
+```
+
+Learnings load at setup on every run and override playbook defaults; `feedback promote` later folds proven rules into the owning playbook or script, `feedback retire <id>` deactivates a bad one (ids are never deleted). The loop ends by bumping the plugin version, committing, and running `claude plugin update fs-design` — required, because the installed plugin is a frozen cache copy that never sees repo edits on its own.
+
+Installs from GitHub (no local repo clone) write rules to a personal overlay at `~/.claude/fs-design.learnings.md` instead — read live each session, survives updates, and PR-able into the repo when a rule deserves to be shared.
+
 ## Keeping it current
 
 Ground truth is `packages/luz/src/styles.css` on platform `main`. When tokens or components change:
@@ -99,6 +114,7 @@ fs-design/
     ├── SKILL.md              # the hub: setup, surface modes, command table, routing
     ├── reference/            # product.md · luz-core.md · components.md · craft-floor.md
     │                         # routing.md · DESIGN.snapshot.md · one playbook per command
+    │                         # feedback.md (the loop) · learnings.md (persisted rules)
     └── scripts/
         ├── context.mjs       # session setup + sentinel drift check + target classification
         ├── luz-lint.mjs      # the vocabulary scanner (also exports scanFile for the hook)

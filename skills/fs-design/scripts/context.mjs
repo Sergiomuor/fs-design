@@ -16,6 +16,7 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { homedir } from 'node:os';
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 // scripts/ → fs-design/ (skill root); plugin root is two levels above that.
@@ -160,6 +161,21 @@ function main() {
     lines.push(`target-note: ${t.note}`);
   }
 
+  // Learnings (feedback loop): shipped rules + per-user overlay. Active entries
+  // end their header line with the word "active" — see reference/learnings.md.
+  const countActive = (path) => {
+    try { return (readFileSync(path, 'utf8').match(/^## L\d+ .*· active\s*$/gm) || []).length; }
+    catch { return 0; }
+  };
+  const nShipped = countActive(join(SKILL_ROOT, 'reference/learnings.md'));
+  const personalPath = join(homedir(), '.claude', 'fs-design.learnings.md');
+  const nPersonal = existsSync(personalPath) ? countActive(personalPath) : 0;
+  lines.push(nShipped > 0
+    ? `learnings: ${nShipped} active rule${nShipped === 1 ? '' : 's'} — load reference/learnings.md with the other references; rules override playbook defaults.`
+    : 'learnings: none active — the feedback loop (reference/feedback.md) records them at the end of each run.');
+  if (nPersonal > 0) lines.push(`learnings-personal: ${personalPath} (${nPersonal} active — load after shipped learnings; personal wins on conflict).`);
+
+  lines.push('feedback-loop: end design commands with the numbered feedback offer (reference/feedback.md); skip for maintenance commands.');
   lines.push('directives: load reference/product.md + reference/luz-core.md now; load reference/craft-floor.md immediately before editing UI; run luz-lint on changed files after edits.');
   console.log(lines.join('\n'));
 }
