@@ -62,7 +62,7 @@ Entry format is defined at the top of learnings.md: next sequential id, scope, d
 
 The installed plugin is a frozen copy; repo edits are invisible until refreshed:
 
-1. Bump the patch version in `.claude-plugin/plugin.json` (the cache is keyed by version).
+1. Bump the patch version in `.claude-plugin/plugin.json`. Mandatory, not cosmetic: an unchanged version makes the updater report "already at the latest" and copy nothing (verified 2026-08-18).
 2. Commit everything in the plugin repo — message `feedback: <summary> (Ln–Lm)`. Pushing to GitHub is asked, never automatic.
 3. `claude plugin update fs-design@fs-design` — the qualified `name@marketplace` form; the bare name is not found.
 4. Verify: `~/.claude/plugins/installed_plugins.json` shows the new version and the new cache path contains the entry just written (ignore its `gitCommitSha` — it is not refreshed on update; compare versions and content). Report the verified version and that it applies from the **next** session — the running session keeps the old copy ("rules L004–L005 active as of 1.1.3, from your next session").
