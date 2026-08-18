@@ -22,3 +22,7 @@ Before the first edit of any run, state in one short block: the playbook being f
 ## L002 · global · added 2026-08-18 · active
 Every visual value written into code (colour, spacing, type, radius, shadow) must have a citable source: Figma, DESIGN.md/luz-core, or a named incumbent sibling surface. No source → it is a spec gap: stop and ask before writing the value. Cite the source for load-bearing choices in the report.
 — origin: first-run retrospective — output visuals were off-spec; values were chosen from intuition instead of read from truth.
+
+## L003 · component:DataLabel · added 2026-08-18 · active
+Labels inside data-boxes (DataLabel headings, DataBlock KPI labels) always render Inter 400, 10px/14px, 0.7px letter-spacing, uppercase, in `text-text-medium` #585b5d. Never weight 500 (too bold at 10px — ruled against a live render), never untracked `text-data-label`, and never the hardcoded `color="dark"`. Do not restyle the `text-label-xs` utility to achieve this — it has weight-500 consumers; the recipe lives in DataLabel's heading slot.
+— origin: /admin/accounts shape run — user ruled the data-box label recipe against the live render (500 read too bold) and set the colour to text-medium.
