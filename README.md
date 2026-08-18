@@ -1,20 +1,20 @@
 # fs-design
 
-Fair Supply's design suite for Claude Code, built around the **FS-Luz** design system. It already knows our world: the Luz token vocabulary from `packages/luz/src/styles.css`, the `@repo/luz` component library, the locked exposure/mitigation colour scales, and the three personas (Pete, Petra, Esther) every surface must serve.
+Fair Supply's design suite for Claude Code — a full mirror of the [Impeccable](https://github.com/anthropics/claude-code) design-skill capability set, rebuilt around the **FS-Luz** design system and the Fair Supply product principles. Where Impeccable is generic, fs-design already knows your world: the token vocabulary in `packages/luz/src/styles.css`, the `@repo/luz` component library, the locked exposure/mitigation colour scales, and the three personas (Pete, Petra, Esther) every surface must serve.
 
 Internal Fair Supply tooling.
 
 ## What's inside
 
-- **One hub skill** — `/fs-design <command> [target]`, with commands covering the whole design workflow: plan, review, refine, enhance, fix, iterate, learn, maintain.
-- **Baked-in context** — the product principles and personas (`reference/product.md`), the complete FS-Luz spec (`reference/DESIGN.snapshot.md`), and distilled working references.
-- **luz-lint** — a zero-dependency scanner that flags anything outside the Luz vocabulary (raw hex colours, stock Tailwind classes, off-scale spacing, gradients, purple used as decoration, and more) with fix hints.
-- **An opt-in hook** — auto-lints every UI file edit Claude makes and feeds findings back into the session. Off until a project switches it on.
-- **Drift detection** — every session checks the plugin's token knowledge against production `styles.css` and warns if production has moved.
+- **One hub skill** — `/fs-design <command> [target]` with 25 commands across Build / Evaluate / Refine / Enhance / Fix / Iterate / Learn / Maintain.
+- **Baked-in context** — `reference/product.md` (personas, brand, the five design principles from Product MD) and `reference/DESIGN.snapshot.md` (the complete FS-Luz spec), plus distilled working references (`luz-core.md`, `components.md`, `craft-floor.md`).
+- **luz-lint** — a zero-dependency scanner enforcing the Luz vocabulary: hex/rgb literals (with token-name fix hints), stock Tailwind palette/type classes, spacing utilities ≥ 10 and fractionals, arbitrary values, stock radius/shadow, `dark:` variants, gradients, legacy `@repo/luz` exports, purple-as-decoration, appended currency codes.
+- **An opt-in hook** — auto-lints every UI file edit Claude makes, feeding findings straight back into the session. Dormant until you switch it on per project.
+- **Drift detection** — `context.mjs` verifies sentinel tokens against production `styles.css` every session; `doctor` reports layer-by-layer drift.
 
 ## Install
 
-From GitHub (public repo, no special access needed):
+Teammates install straight from GitHub (public repo, no special access needed):
 
 ```bash
 claude plugin marketplace add Sergiomuor/fs-design
@@ -28,19 +28,22 @@ claude plugin marketplace add /path/to/fs-design
 claude plugin install fs-design@fs-design
 ```
 
-Each teammate installs it once on their own machine — the platform repo doesn't pull it in automatically. Most commands operate on real files, so a local clone of `FairSupply/platform` is assumed.
+This is a per-person, per-machine install — each teammate runs it once themselves; it isn't pulled in automatically via the platform repo. It also assumes a local clone of `FairSupply/platform` on disk, since most commands (`critique`, `normalize`, `audit`, …) operate on real files there.
 
-## How to use it
+## Commands
 
-Everything goes through the hub:
+| | |
+|---|---|
+| **Build** | `shape` (plan before code) · `init` (install context files) · `document` (regenerate DESIGN.md) · `extract` (promote patterns into luz) |
+| **Evaluate** | `critique` (scored UX review + persona walkthrough) · `audit` (technical checks, P0–P3) |
+| **Refine** | `normalize` (realign drift onto tokens) · `polish` (final pass) · `distill` (strip to meaning) · `harden` (errors/edges/i18n) · `onboard` (empty states, first-run) |
+| **Enhance** | `bolder` (sharpen consequence) · `quieter` (calm overstated surfaces) · `animate` (luz motion vocabulary) · `colorize` (domain colour semantics) · `typeset` (type roles, 10px grid) · `layout` (5px scale, gap ownership) · `delight` (calm-confidence details) · `overdrive` (flagship craft) |
+| **Fix** | `clarify` (ESG→risk/action/outcome copy) · `adapt` (viewports + print/PDF report mode) · `optimize` (perceived performance) |
+| **Iterate** | `live` (Storybook/browser iteration loop) |
+| **Learn** | `feedback` (end-of-run feedback capture → persistent rules; also `list` / `retire` / `promote`) |
+| **Maintain** | `doctor` (drift report) · `lint` (run luz-lint) · `hooks` (manage the auto-lint hook) |
 
-```
-/fs-design <command> [target]
-```
-
-The target can be a file, a folder, a route, or a plain-language description of the surface you're working on. Run it from your platform checkout so the command can read and edit real files.
-
-A typical run: the command loads its playbook plus the FS-Luz references, does the work, lint-checks what it changed, and ends with a short feedback offer — anything you correct there can become a persistent rule for future runs.
+Examples:
 
 ```
 /fs-design critique apps/web/src/app/(dashboard)
@@ -49,51 +52,19 @@ A typical run: the command loads its playbook plus the FS-Luz references, does t
 /fs-design lint --diff
 ```
 
-## Commands
-
-| | Command | What it does |
-|---|---|---|
-| **Build** | `shape` | Plan a feature's UX before any code is written |
-| | `init` | Install the FS context files (PRODUCT.md, DESIGN.md) into a project |
-| | `document` | Regenerate DESIGN.md from production `styles.css` |
-| | `extract` | Promote repeated app patterns into luz components/tokens |
-| **Evaluate** | `critique` | Scored UX review with a persona walkthrough |
-| | `audit` | Technical checks (lint, a11y, theming, responsive, perf), P0–P3 report |
-| **Refine** | `normalize` | Realign drifted UI back onto tokens and luz components |
-| | `polish` | Final quality pass before shipping |
-| | `distill` | Strip a surface down to its meaning |
-| | `harden` | Error states, edge cases, i18n |
-| | `onboard` | First-run flows and empty states |
-| **Enhance** | `bolder` | Amplify hierarchy without adding noise |
-| | `quieter` | Calm an overstated surface |
-| | `animate` | Purposeful motion within the luz motion vocabulary |
-| | `colorize` | Apply the domain colour scales correctly |
-| | `typeset` | Type roles and the 10px type grid |
-| | `layout` | The 5px spacing scale, gap ownership, region rhythm |
-| | `delight` | Calm-confidence details — the informed-advisor feel |
-| | `overdrive` | Flagship craft for hero surfaces, within tokens |
-| **Fix** | `clarify` | Rewrite UX copy into risk / action / outcome language |
-| | `adapt` | Viewports, density, print/PDF report mode |
-| | `optimize` | Perceived performance: skeletons, hydration, bundle hygiene |
-| **Iterate** | `live` | Visual iteration loop against Storybook or the running app |
-| **Learn** | `feedback` | Capture run feedback; confirmed rules persist (`list` / `retire <id>` / `promote`) |
-| **Maintain** | `doctor` | Drift report: plugin vs DESIGN.md vs production |
-| | `lint` | Run luz-lint directly |
-| | `hooks` | Turn the auto-lint hook `on` / `off` / `status` |
+The four "expressive" Impeccable commands are deliberately reinterpreted for Luz's minimalist, colour-is-consequence ethos: **bolder** amplifies hierarchy (scale, black ink, whitespace) instead of adding colour; **colorize** applies the locked domain scales correctly instead of decorating; **delight** builds informed-advisor confidence instead of whimsy; **overdrive** pushes data-viz and interaction craft within tokens instead of effects.
 
 ## luz-lint
 
-The scanner behind `audit`, the hook, and `/fs-design lint`. Run it standalone from anywhere in the platform repo:
-
 ```bash
-# changed files vs HEAD (default)
+# changed files vs HEAD (default), from anywhere in the platform repo
 node <plugin-root>/skills/fs-design/scripts/luz-lint.mjs --diff
 
 # specific files, machine output
 node <plugin-root>/skills/fs-design/scripts/luz-lint.mjs apps/web/src/foo.tsx --json
 ```
 
-Exits 1 on errors, 0 otherwise. Escapes: `luz-lint-ignore` suppresses its own line and the next one; `luz-lint-disable` in a file's first 10 lines skips the file. Findings in `*.test.*` / `*.spec.*` files downgrade to warnings.
+Exit 1 on errors, 0 otherwise. Escapes: `luz-lint-ignore` suppresses its own line and the next one; `luz-lint-disable` in a file's first 10 lines skips the file. Findings in `*.test.*`/`*.spec.*` downgrade to warnings.
 
 ### The hook
 
@@ -105,15 +76,21 @@ node <plugin-root>/skills/fs-design/scripts/hook-admin.mjs status
 node <plugin-root>/skills/fs-design/scripts/hook-admin.mjs off
 ```
 
-When on, every UI file Claude edits is scanned and the findings come straight back into the session, so violations get fixed in the same turn. The hook never blocks an edit. The toggle lives in `.claude/fs-design.local.json` at the project root (a per-person setting — add it to `.gitignore`); `FS_DESIGN_HOOK=1` forces it on for a session.
+The toggle lives in `.claude/fs-design.local.json` at the project root (a per-person setting — add it to `.gitignore`). `FS_DESIGN_HOOK=1` forces it on for a session. When active, every UI file Claude edits is scanned and findings return as context, so violations get fixed in the same turn. The hook never blocks an edit.
 
 ## The feedback loop
 
-Every design command ends with one feedback offer: a numbered inventory of what the run touched (components, files, decisions). Answer by number or name — or just point at the rendered surface in Storybook or the browser. Each piece of feedback becomes a one-off fix (applied now), a durable rule, a reference correction, or a lint/script change. Durable rules are written to `reference/learnings.md` only after you confirm the exact wording; they load on every run and override playbook defaults.
+Every design command ends with one structured feedback offer: a numbered inventory of what the run touched (components, files, decisions), which you can answer by number/name or by pointing at the rendered surface in Storybook/the browser. Each item is classified — one-off fix (applied now), durable rule, reference correction, or lint/script change — and **durable rules are only written after you confirm the exact wording**, into `reference/learnings.md`:
 
-`feedback list` shows the current rules, `feedback retire <id>` deactivates one (ids are never deleted), and `feedback promote` folds a proven rule into the owning playbook or script.
+```
+## L003 · component:Button · added 2026-08-20 · active
+<the rule>
+— origin: <what feedback produced it>
+```
 
-Because the installed plugin is a frozen cache copy, persisting a rule ends with: bump the plugin version, commit, and run `claude plugin update fs-design@fs-design` — new rules apply from the next session. Installs from GitHub (no local clone) write rules to a personal overlay at `~/.claude/fs-design.learnings.md` instead — read live each session, survives updates, and PR-able into the repo when a rule deserves to be shared.
+Learnings load at setup on every run and override playbook defaults; `feedback promote` later folds proven rules into the owning playbook or script, `feedback retire <id>` deactivates a bad one (ids are never deleted). The loop ends by bumping the plugin version, committing, and running `claude plugin update fs-design@fs-design` — required, because the installed plugin is a frozen cache copy that never sees repo edits on its own (new rules apply from the next session).
+
+Installs from GitHub (no local repo clone) write rules to a personal overlay at `~/.claude/fs-design.learnings.md` instead — read live each session, survives updates, and PR-able into the repo when a rule deserves to be shared.
 
 ## Keeping it current
 
