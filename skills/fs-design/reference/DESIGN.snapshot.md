@@ -694,7 +694,7 @@ ProgressBar, ProgressDots, Indicator, NotFound, AlertDialog, Separator, ScrollAr
 - Do not use purple as decoration. Purple is focus, selection, and a data series — nothing else.
 - Do not colour without consequence: no decorative tints, no alarmist red on routine information, no gradients, no glassmorphism, no decorative glows or shadows.
 - Do not append currency codes to formatted values (`$1,000 (USD)`) — the symbol convention already carries it.
-- Do not copy prototype HTML/CSS into production — prototypes are references, not sources.
+- Do not copy static mockup HTML/CSS into production — static mockups are references, not sources. Prototypes built from real `@repo/luz` components graduate through normal code review instead.
 - Do not rename tokens or change a component's public API as a side effect of another task — propose that separately.
 - Do not reach for the legacy exports in §7, the deprecated `size` prop on LayoutContainer, or the phantom `font-twk` class (it doesn't exist).
 - Do not put outer margins on components to position them — that's the container's job.

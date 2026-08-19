@@ -1,6 +1,6 @@
 # Craft floor
 
-Load this after direction is settled, immediately before editing UI. Build without announcing the checklist. A signed-off Figma spec or an explicit user instruction overrides anything here; your own habit does not. When the luz-lint hook is active it already catches the mechanical vocabulary violations as you edit — act on its findings instead of re-auditing each rule.
+Load this after direction is settled, immediately before editing UI. Build without announcing the checklist. A signed-off Figma spec, an explicit user instruction, or an active learnings rule overrides anything here; your own habit does not. When the luz-lint hook is active it already catches the mechanical vocabulary violations as you edit — act on its findings instead of re-auditing each rule.
 
 ## Verify
 

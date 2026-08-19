@@ -22,4 +22,4 @@ Typography here is a closed system: three faces with fixed jobs, composite roles
 
 Inventory every text node on the surface → assign its role from the casting table → flag hierarchy dishonesty (two adjacent ranks looking identical; a label outranking its value) → fix rank by size steps, not weight → verify line-heights land on the grid (computed styles: 20/30/40 dominate) → check colour tiers (`black` content · `dark` values · `medium` secondary · `light` captions).
 
-Verify: luz-lint clean (raw type classes, phantom fonts, raw leading all flagged); one render pass confirming rhythm — consecutive baselines step in 10px increments; the most consequential number is the typographic hero. Report: recastings by node, any deliberate `leading-body-*` mixes and why.
+Verify: luz-lint clean (raw type classes, phantom fonts, raw leading all flagged); one render pass confirming rhythm — consecutive baselines of heading/data/label roles step in 10px increments (body prose runs its own 24/30 leading and is exempt); the most consequential number is the typographic hero. Report: recastings by node, any deliberate `leading-body-*` mixes and why.

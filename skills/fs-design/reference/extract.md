@@ -22,4 +22,4 @@ Rank by blast radius: promote what's used ≥ 3 places or sits on a flagship sur
 
 ## Verify
 
-Storybook renders every variant/state; call sites diff shows net deletion; luz-lint clean across touched files; component checklist complete. Report: what was promoted (with API), tokens added, call sites migrated, Figma parity status, anything deliberately left local (and why it doesn't qualify).
+Storybook renders every variant/state; call sites diff shows net deletion; luz-lint clean across touched files; component checklist complete. Report: what was promoted (with API), tokens added, call sites migrated, Figma parity status, the plugin's `reference/components.md` flagged for refresh (a promoted component or variant makes its export map stale — point the user at `doctor`), anything deliberately left local (and why it doesn't qualify).

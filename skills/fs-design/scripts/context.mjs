@@ -64,7 +64,7 @@ function classifyTarget(target, root) {
       note: 'Storybook docs surface — MDX prose gets NO preview decorators (bring your own providers); runtime-composed classes may need a safelist.',
     };
   }
-  if (/report|pdf|print/i.test(rel)) {
+  if (/\b(?:reports?|pdf|print)\b/i.test(rel)) {
     return {
       surface: 'report',
       mode: 'Report',

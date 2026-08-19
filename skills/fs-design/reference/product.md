@@ -1,5 +1,7 @@
 # Fair Supply — product context (PRODUCT.md snapshot)
 
+Snapshot verified 2026-08-17 — run `doctor` if you suspect the product context has moved.
+
 Fair Supply is a supplier risk and ESG compliance platform: companies onboard, screen, monitor, and report on the risk profiles of their suppliers, and suppliers participate to complete documentation and action mitigation requests. The platform's job is to track risk and compliance status, automate monitoring at scale, surface issues, and generate documentation that proves regulatory compliance.
 
 Key workflows: supplier onboarding & screening · risk management across the supplier base · compliance & regulatory reporting · supplier-side participation.

@@ -5,13 +5,13 @@
   },
   "metadata": {
     "description": "Marketplace for the fs-design plugin — Fair Supply's FS-Luz design suite.",
-    "version": "1.0.0"
+    "version": "1.2.0"
   },
   "plugins": [
     {
       "name": "fs-design",
       "source": "./",
-      "description": "FS-Luz design suite: /fs-design shape · critique · audit · normalize · polish · harden · animate · … plus luz-lint enforcement.",
+      "description": "Build production-fidelity interactive prototypes for the FS platform with real Luz tokens and @repo/luz components; self-improving via recorded feedback. Commands: /fs-design shape · critique · audit · normalize · polish · harden · animate · … plus luz-lint enforcement.",
       "category": "design"
     }
   ]

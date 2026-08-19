@@ -48,7 +48,6 @@ export const HEX_TO_TOKEN = {
   '#fbfbfc': 'base-gray-background (surface-background)',
   '#fcfaff': 'base-gray-active',
   '#eeeeee': 'base-gray-other (muted)',
-  '#f2fbfd': 'brand-blue-100',
   '#00ace1': 'brand-blue-500',
   '#00799e': 'brand-blue-700',
   '#004b62': 'brand-blue-900',
@@ -161,8 +160,8 @@ const RULES = [
   {
     id: 'rgb-literal',
     severity: 'error',
-    re: /\brgba?\(/g,
-    message: 'hardcoded rgb()/rgba() colour',
+    re: /\b(?:rgba?|hsla?|hwb|oklch|oklab|lab|lch)\(/g,
+    message: 'hardcoded colour function (rgb/hsl/oklch/hwb/lab)',
     hint: () => 'use a luz token; the only rgba values in the system are the stroke-shadow halos, already tokenised',
   },
   {
@@ -240,14 +239,14 @@ const RULES = [
   {
     id: 'stock-radius',
     severity: 'warn',
-    re: /(?<![\w-])rounded(?:-(?:sm|md|lg|xl|2xl|3xl))?(?![\w-])/g,
+    re: /(?<![\w-])rounded(?:-(?:xs|sm|md|lg|xl|2xl|3xl|4xl))?(?![\w-])/g,
     message: 'stock radius class — off the luz radius vocabulary',
     hint: () => 'luz radii: rounded-input/button (4px), rounded-xsmall (2px), rounded-1/2/3 (5/10/20px), rounded-pill (10px), rounded-full for true capsules',
   },
   {
     id: 'stock-shadow',
     severity: 'warn',
-    re: /(?<![\w-])shadow-(?:sm|md|lg|xl|2xl|inner)(?![\w-])/g,
+    re: /(?<![\w-])shadow(?:-(?:2xs|xs|sm|md|lg|xl|2xl|inner))?(?![\w-])/g,
     message: 'stock shadow class — off the luz elevation vocabulary (and depth should be borders first)',
     hint: () => 'luz shadows: shadow-subtle, shadow-light (bordered lift), shadow-heavy (overlays), shadow-focus; prefer a 1px surface-border hairline',
   },
@@ -261,7 +260,7 @@ const RULES = [
   {
     id: 'gradient',
     severity: 'error',
-    re: /(?<![\w-])bg-gradient-to-(?:t|tr|r|br|b|bl|l|tl)(?![\w-])/g,
+    re: /(?<![\w-])bg-(?:(?:gradient|linear)-to-(?:t|tr|r|br|b|bl|l|tl)|linear-\d+|radial|conic)(?![\w])/g,
     message: 'gradient — gradients do not exist in Luz',
     hint: () => 'flat token fills only; emphasis comes from hierarchy, space, and black ink',
   },

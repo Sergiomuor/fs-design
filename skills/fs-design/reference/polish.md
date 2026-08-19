@@ -4,7 +4,7 @@ The last step, not the first: polish only functionally complete work. Polish is 
 
 ## The pass, in order
 
-1. **Vocabulary sweep.** `luz-lint --diff`. Zero errors; every surviving warning has a comment earning it.
+1. **Vocabulary sweep.** `luz-lint --diff` (or pass the target's files explicitly when the working tree is clean — a committed target scans zero files under `--diff`). Zero errors; every surviving warning has a comment earning it.
 2. **Rhythm.** Spacing values on the 5px scale and owned once (container pads, gap separates; no child margins). Region/ModuleSection at the 50px rhythm; field label-to-input at `gap-field` (6px). Verify computed values, not class names.
 3. **Type.** Every text node wears a role; line-heights land on the 10px grid; metrics in the data roles (Lausanne 200–300), labels in `data-label`/`label-xs`; no bare unstyled text (it falls to the system font); weights follow the inverse-to-size rule.
 4. **States.** Every interactive element: hover, focus (purple ring/halo; red for destructive), active, disabled (tokenised — never restyled per-page). Every async region: loading skeleton mirroring the real shape, error contained at component level, empty state with a next action. Every form field: error/success halos, validation timing consistent (onBlur default).

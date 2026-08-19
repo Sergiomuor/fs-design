@@ -13,7 +13,7 @@ Motion at Fair Supply is feedback, continuity, and quiet confidence — never sp
 
 ## Where motion earns its place
 
-1. **State feedback** — hover/press/focus transitions on controls (150–250ms, ease-out). Luz buttons and inputs already carry these; don't re-animate them per page.
+1. **State feedback** — hover/press/focus transitions on controls (150–200ms, ease-out). Luz buttons and inputs already carry these; don't re-animate them per page.
 2. **Spatial continuity** (Work Happens in Place) — panels sliding in from their origin edge, expandables unfolding in place, dialog scale-fade. The motion explains *where the detail came from*, preserving the parent context.
 3. **Data change** — Odometer for in-place value updates; a bar/segment easing to its new proportion. The motion says "this changed", so it must run only on change, not on mount.
 4. **Progress** — shimmer skeletons while loading; determinate `ProgressBar` easing between steps.

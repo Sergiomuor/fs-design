@@ -1,7 +1,7 @@
 {
   "name": "fs-design",
-  "version": "1.1.5",
-  "description": "Fair Supply's design suite for the FS-Luz system. Mirrors the full Impeccable capability set — shape, critique, audit, polish, normalize, harden, animate, and more — reinterpreted through Luz tokens, luz components, and the Pete/Petra/Esther product principles. Includes luz-lint enforcement.",
+  "version": "1.2.0",
+  "description": "Fair Supply's design suite for the FS-Luz system. Builds interactive prototypes of new designs from real Luz tokens and @repo/luz components — visually indistinguishable from production — and persists run feedback as learnings rules. Mirrors the full Impeccable capability set — shape, critique, audit, polish, normalize, harden, animate, and more — reinterpreted through the Pete/Petra/Esther product principles. Includes luz-lint enforcement.",
   "author": {
     "name": "Fair Supply",
     "email": "sergio.murillo@fairsupply.com.au"
@@ -11,6 +11,8 @@
     "luz",
     "design-system",
     "fair-supply",
+    "prototype",
+    "feedback",
     "lint"
   ]
 }

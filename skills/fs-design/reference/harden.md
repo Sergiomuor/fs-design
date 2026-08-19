@@ -23,4 +23,4 @@ For every data region, force the four answers:
 
 ## Verify
 
-Simulate each failure per region (mock the fetch, feed the long name, empty the list) — Storybook stories per state are the durable proof; add missing ones. Keyboard-walk the whole flow. Run `luz-lint --diff`. Report: regions hardened, states added (with story names), landmines fixed, anything needing backend support to harden further.
+Simulate each failure per region (mock the fetch, feed the long name, empty the list) — Storybook stories per state are the durable proof; add missing ones. Keyboard-walk the whole flow. Run `luz-lint --diff` (skip when the lint hook is on — it already told you). Report: regions hardened, states added (with story names), landmines fixed, anything needing backend support to harden further.

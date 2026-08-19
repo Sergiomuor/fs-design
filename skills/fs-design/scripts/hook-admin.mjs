@@ -45,7 +45,9 @@ try {
 if (cmd === 'status') {
   const state = process.env.FS_DESIGN_HOOK === '1' || process.env.FS_DESIGN_HOOK === 'on'
     ? 'on (forced by FS_DESIGN_HOOK env)'
-    : cfg.luzLintHook === 'on' ? 'on' : 'off (default)';
+    : process.env.FS_DESIGN_HOOK === '0' || process.env.FS_DESIGN_HOOK === 'off'
+      ? 'off (forced by FS_DESIGN_HOOK env)'
+      : cfg.luzLintHook === 'on' ? 'on' : 'off (default)';
   console.log(`luz-lint hook for ${root}: ${state}`);
   console.log(`config file: ${cfgPath}${existsSync(cfgPath) ? '' : ' (not created yet)'}`);
   process.exit(0);

@@ -17,7 +17,7 @@ Application code uses named components, never raw `<div>`s, and not Box directly
 
 ### Reuse before create
 
-Search `packages/luz/src/` before building anything. Extend via props and variants before creating new components; ask before creating a component that doesn't exist in luz. New or changed components ship complete: full variant set; hover, focus, disabled, error, loading, and empty states; a story per variant. Figma and code stay in parity — when they disagree, stop and flag; never silently diverge.
+Search `packages/luz/src/` before building anything. Extend via props and variants before creating new components; ask before creating a component that doesn't exist in luz. New or changed luz components ship complete: full variant set; hover, focus, disabled, error, loading, and empty states; a story per variant. (Prototype-stage app components still need the real interaction states, but earn stories only when promoted via `extract`.) Figma and code stay in parity — when they disagree, stop and flag; never silently diverge.
 
 ## Colour
 
@@ -61,7 +61,7 @@ Roles are composite utilities — one class sets family, size, line-height, weig
 | `text-label-xs` | 10/14 · 500 · uppercase · 0.7px | Figma-faithful label |
 | `text-data-small-alt` / `-tiny-alt` | 14/20 · 12/20 mono | IDs and codes |
 
-**Rules:** weight is inverse to size (35px runs at 200, 10px labels at 500). Line-heights snap to the 10px grid (20/30/40) — this is load-bearing; layout tokens are computed from type tokens. Raw Tailwind text classes are quietly incompatible (`text-sm` is 14/**20** where `text-body-md` is 14/**24**). Pick a role class, never assemble family+size+leading by hand; `leading-body-*` exists for body rhythm on a non-body size. Components: `Heading` (h2/md default), `Text` (p/md, has `weight`), `DataText` (real `<data>` element, takes `value`), `HeadingLink`. Shared `color` options: `black` (default), `dark`, `medium`, `light`, `brand.blue`, `brand.green`, `brand.orchid`.
+**Rules:** weight is inverse to size (35px runs at 200, 10px labels at 500). Heading and data line-heights snap to the 10px grid (20/30/40) — load-bearing for layout math, since layout tokens are computed from type tokens; body prose runs its own 24/30 leading, micro roles (tiny/aside/label-xs) on 14. Raw Tailwind text classes are quietly incompatible (`text-sm` is 14/**20** where `text-body-md` is 14/**24**). Pick a role class, never assemble family+size+leading by hand; `leading-body-*` exists for body rhythm on a non-body size. Components: `Heading` (h2/md default), `Text` (p/md, has `weight`), `DataText` (real `<data>` element, takes `value`), `HeadingLink`. Shared `color` options: `black` (default), `dark`, `medium`, `light`, `brand.blue`, `brand.green`, `brand.orchid`.
 
 **Cautions:** all sizes are fixed px. Nothing sets Inter on `<body>` — bare text outside a role class renders in the system font. `font-twk` does not exist (silent fallback). 10px labels are the floor; never smaller.
 

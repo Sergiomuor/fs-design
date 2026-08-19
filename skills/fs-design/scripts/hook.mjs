@@ -69,7 +69,10 @@ async function main() {
   if (findings.length === 0) return;
 
   const errors = findings.filter((f) => f.severity === 'error').length;
-  const shown = findings.slice(0, MAX_FINDINGS);
+  // errors first — truncation must never hide an error behind warnings
+  const shown = [...findings]
+    .sort((a, b) => (a.severity === b.severity ? 0 : a.severity === 'error' ? -1 : 1))
+    .slice(0, MAX_FINDINGS);
   const body = shown
     .map((f) => `  ${f.line}:${f.col} [${f.severity}] ${f.rule}: \`${f.snippet}\` — ${f.message}${f.hint ? ` Fix: ${f.hint}` : ''}`)
     .join('\n');
@@ -85,4 +88,12 @@ async function main() {
   }));
 }
 
-main().catch(() => { /* never block the edit */ });
+main().catch((e) => {
+  // never block the edit — but say the check didn't run, or enforcement vanishes silently
+  console.log(JSON.stringify({
+    hookSpecificOutput: {
+      hookEventName: 'PostToolUse',
+      additionalContext: `luz-lint hook failed (${String(e?.message ?? e)}) — run luz-lint on the changed files manually.`,
+    },
+  }));
+});

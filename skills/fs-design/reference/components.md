@@ -11,6 +11,7 @@ Exact exports from the `@repo/luz` barrel, verified against `packages/luz/src/` 
 - **Card** — Box with `p={5}`, `border={1}`, white surface, square by default (`radius={2}` opt-in). Shadowed alternative: `border={0} shadow="light"`.
 - **Region / RegionHeader / RegionContent** — the titled page-section scaffolding; header and content at `p={7}` (50px rhythm). The default answer to "titled block on a page".
 - **ModuleSection** family — Region's tabbed sibling (`title`, Header `p={7}`, TabList/Tab, Panel).
+- **ExpandableSection** — card-contained collapsible section (Base UI Collapsible): `title` (required), `description`, `icon`, controlled `open`+`onOpenChange` or uncontrolled `defaultOpen`, `disabled`. The standard progressive-disclosure drill-in ("methodology one step deeper").
 - **LayoutContainer** — centered max-width (`maxWidth`: default 1440 / narrow 755 / admin 1200 / large 1900 / fluid; `size` prop is deprecated). **LayoutHeader / HeaderAction** — page header band + action slot. **SidebarLayout** (`sidebar` + children, `gap={4}`), **SidebarNav**.
 - **Breadcrumb / BreadcrumbItem** — path above page titles.
 - Typography: **Heading** (h2, md), **Text** (p, md, `weight`), **DataText** (`<data>` + machine `value`; sizes xl…tiny-alt), **HeadingLink**.
@@ -22,7 +23,7 @@ Exact exports from the `@repo/luz` barrel, verified against `packages/luz/src/` 
 
 ## Forms
 
-- **Input** — 40px, white fill, #e2e2e3 border, 4px radius, 15/10 padding; prefix/suffix slots with own padding tokens; focus = purple border + 20% halo; error/success = `input-error-*`/`input-success-*` halos; disabled = muted fill.
+- **Input** — `h-input` (40px), white fill, `surface-border` hairline (base-gray-border), `rounded-input` (4px), `px-input py-input` (15/10); prefix/suffix slots with own padding tokens; focus = purple border + 20% halo; error/success = `input-error-*`/`input-success-*` halos; disabled = muted fill.
 - **Dropdown** — Base UI select; `options {value,label}`, single/multi `mode`, `clearable`, `variant="default"|"toolbar"`; popups always dark regardless of trigger variant.
 - **Form / FormField / FieldWrapper / FormSubmit / useForm** — TanStack Form + Zod `schema`, `validationMode="onBlur"` default; FieldWrapper provides the 6px `gap-field` label rhythm.
 - Checkbox, Radio/RadioGroup, Switch, Calendar (+ DayPicker, DayRangePicker, DateRangePicker, SpendRangePicker), Dropzone (+ `validateFile`), SearchCombobox, TitleSelect, FormOTP/InputOTP, FormContext, FilterVariantContext.

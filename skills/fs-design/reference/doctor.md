@@ -6,7 +6,7 @@ Reports disagreement between the four layers that must stay aligned: **productio
 
 1. **Sentinels** — `context.mjs` already verified ten sentinel tokens against live styles.css this session; re-read its DRIFT/SENTINEL-MISSING lines. Any hit means layers 1↔3 disagree.
 2. **DESIGN.md ↔ styles.css** — run the `document` diff read-only (changed/new/ghost tokens, component inventory). Note whether the checkout is a prototype branch: compare against `origin/main`, and say which branch the working tree is on.
-3. **Plugin internals** — `reference/DESIGN.snapshot.md` vs root DESIGN.md (should be byte-identical after each `document` run); `luz-lint.mjs` HEX_TO_TOKEN map vs the frontmatter colour table (a renamed/added colour needs a map entry); `context.mjs` SENTINELS vs current values.
+3. **Plugin internals** — `reference/DESIGN.snapshot.md` vs root DESIGN.md (should be byte-identical after each `document` run); `luz-lint.mjs` HEX_TO_TOKEN map vs the frontmatter colour table (a renamed/added colour needs a map entry); `context.mjs` SENTINELS vs current values; `reference/components.md` — compare its self-declared verification date (and spot-check its export list) against the last change to `packages/luz/src/`; stale → flag with repair owner: plugin maintenance.
 4. **Neighbours** —
    - `apps/storybook/public/landing/luz-reference.md`: read its self-declared audit date; older than the last token change → stale flag.
    - `.claude/skills/luz/SKILL.md` in the platform repo: known to drift (old category names, legacy components, off values) — spot-check its component categories against `packages/luz/src/components/` and list concrete wrong lines, so the team can decide whether to refresh or retire it.

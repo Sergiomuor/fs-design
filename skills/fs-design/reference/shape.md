@@ -1,6 +1,6 @@
 # /fs-design shape — plan UX/UI before writing code
 
-Use before building any new surface, feature, or component. Shape produces an agreed plan — never code. The deliverable is a spec the user signs off; implementation is a separate step.
+Use before building any new surface, feature, or component. Shape produces an agreed plan — never production code. The deliverable is a spec plus, for visually novel work, an interactive prototype the user signs off; production implementation is a separate step.
 
 ## Method
 
@@ -21,8 +21,8 @@ Use before building any new surface, feature, or component. Shape produces an ag
 
 6. **Plan the whole lifecycle.** For each element: loading (skeleton mirroring its real shape), empty (what it says, what action it offers), error (component-level containment — the shell stays usable), and the states of every control. A plan without these is half a plan.
 
-7. **Mockup sign-off when visual.** For visually novel work, produce a static HTML mockup using real token values and get explicit sign-off before any production code. The mockup is a reference, never a source to copy from.
+7. **Prototype sign-off when visual.** For visually novel work, the sign-off artifact is an interactive, stateful prototype composed from real `@repo/luz` components — a throwaway Storybook story or in-app preview route — demonstrating the step-6 lifecycle states, so what the user approves renders exactly as production will. Get explicit sign-off before any production code; iterate on the prototype with `live`. Only when no render environment is available may a static HTML mockup with real token values stand in, and it must be flagged to the user as lower-fidelity (hand-rolled markup can visibly diverge from real luz rendering). Either artifact is a reference, never a source to copy from.
 
 ## Output
 
-A plan the user can approve in one read: job + mode + persona questions → component map (with the ask-list for anything new) → spec table → lifecycle table → open questions. End with the decision lines that block implementation, if any.
+A plan the user can approve in one read: job + mode + persona questions → component map (with the ask-list for anything new) → spec table → lifecycle table → interactive prototype (when visual) → open questions. End with the decision lines that block implementation, if any.

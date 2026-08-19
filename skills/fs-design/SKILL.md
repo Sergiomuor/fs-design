@@ -1,6 +1,6 @@
 ---
 name: fs-design
-description: Fair Supply's design suite for the FS-Luz system. Use when the user wants to design, redesign, shape, critique, audit, polish, normalize, clarify, distill, harden, optimize, adapt, animate, or otherwise improve any Fair Supply platform UI — dashboards, engagement flows, supplier tables, scorecards, reports, luz components, storybook docs. Covers UX review, visual hierarchy, Luz token/component conformance, accessibility, performance, responsive and print behavior, typography, spacing, colour semantics (exposure/mitigation/risk scales), motion, UX copy and ESG-to-procurement language, error states, empty states, i18n, and promoting patterns into the luz design system. Also for bland surfaces that need sharper consequence, loud surfaces that should be calmer, and luz-lint enforcement of the token vocabulary. Not for backend-only or non-UI tasks.
+description: Fair Supply's design suite for the FS-Luz system. Use when the user wants to design, redesign, shape, prototype, critique, audit, polish, normalize, clarify, distill, harden, optimize, adapt, animate, or otherwise improve any Fair Supply platform UI — dashboards, engagement flows, supplier tables, scorecards, reports, luz components, storybook docs. Covers UX review, visual hierarchy, Luz token/component conformance, accessibility, performance, responsive and print behavior, typography, spacing, colour semantics (exposure/mitigation/risk scales), motion, UX copy and ESG-to-procurement language, error states, empty states, i18n, and promoting patterns into the luz design system. Also for bland surfaces that need sharper consequence, loud surfaces that should be calmer, and luz-lint enforcement of the token vocabulary. Not for backend-only or non-UI tasks.
 version: 1.0.0
 user-invocable: true
 argument-hint: "[shape · critique|audit · normalize|polish|distill|harden|onboard · bolder|quieter|animate|colorize|typeset|layout|delight|overdrive · clarify|adapt|optimize · init|document|extract|live|feedback|doctor|hooks|lint] [target]"
@@ -14,6 +14,7 @@ Core principles:
 - **Figma and the brief win.** Figma/Luz is the source of truth. Never fill a spec gap by inventing values — ask. When Figma, prototype, and code disagree: stop and flag, never pick silently.
 - **Verify in bounded passes, not a loop.** Build fully, inspect once with a batched round (lint + render + states together), fix everything it shows in one batch, confirm with at most one more round, and stop polishing.
 - **Complete means complete.** Full variant set; hover, focus, disabled, error, loading, empty states; a story per variant; skeleton mirrors real content.
+- **New designs ship as prototypes.** A visually novel proposal is reviewed as an interactive, stateful preview composed from real `@repo/luz` components (a throwaway Storybook story or in-app preview route), so what the user approves renders exactly as production will. A static mockup is at most an intermediate step, never the sign-off artifact.
 
 ## Setup
 
@@ -39,7 +40,7 @@ A surface has one primary mode but stays consumable across the spectrum — mean
 
 | Command | Category | Description | Reference |
 |---|---|---|---|
-| `shape [feature]` | Build | Plan UX/UI before writing code: personas, mode, spec table, mockup sign-off | [reference/shape.md](reference/shape.md) |
+| `shape [feature]` | Build | Plan UX/UI before production code: personas, mode, spec table, interactive prototype sign-off | [reference/shape.md](reference/shape.md) |
 | `init` | Build | Install FS context (PRODUCT.md, DESIGN.md) into a project | [reference/init.md](reference/init.md) |
 | `document` | Build | Regenerate/verify DESIGN.md from production styles.css | [reference/document.md](reference/document.md) |
 | `extract [target]` | Build | Promote repeated app patterns into luz components/tokens | [reference/extract.md](reference/extract.md) |

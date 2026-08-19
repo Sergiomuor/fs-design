@@ -4,7 +4,7 @@ The loop that makes the suite learn. Every design run ends with one structured f
 
 ## When this runs
 
-- **End of every design command** (Build / Evaluate / Refine / Enhance / Fix / Iterate): after reporting done, present the inventory (Step 1) and invite feedback once. Declined or ignored → move on; never nag, never block the report.
+- **End of every design command** (Build / Evaluate / Refine / Enhance / Fix / Iterate): after reporting done, present the inventory (Step 1) and invite feedback once. Declined or ignored → move on; never nag, never block the report. Corrections the user already gave **during** the run count as feedback received: pre-classify them (Step 3) and include any rule-worthy ones as drafts in the Step 4 confirmation pass — don't wait for the user to restate them.
 - **Standalone** `/fs-design feedback [notes]`: no fresh run to inventory — reconstruct one from the conversation, `git diff`, or ask which surface the feedback concerns, then continue from Step 2.
 - Maintenance commands (`lint`, `hooks`, `doctor`, `document`, `init`) skip the offer.
 
@@ -34,7 +34,7 @@ Two mechanisms; use whichever the user reaches for:
 |---|---|---|
 | **Fix-now** | One-off taste for this surface only | Apply to the current work immediately; nothing persisted |
 | **Rule** | Would change how *future* runs behave | learnings.md, via the confirmation protocol below |
-| **Reference correction** | A reference file states something factually wrong (value, API, step) | Edit that reference file directly |
+| **Reference correction** | A reference file states something factually wrong (value, API, step) | Verify the corrected fact against ground truth (production styles.css / DESIGN.md / Storybook) first, then edit that reference file directly; unverifiable → route to `doctor`/`document` like a rule-vs-truth conflict |
 | **Script change** | luz-lint gap or false positive; context.mjs misclassification | Edit the script; smoke-test before commit |
 
 One item can be two kinds — "fix this here *and* never do it again" is fix-now + rule. State your classification per item; the user overrides freely. A rule that contradicts DESIGN.md/Figma ground truth is not a rule — it's drift or a spec question: route it to `doctor`/`document` and say so.
